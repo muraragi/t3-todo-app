@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import { trpc } from '../utils/trpc'
 import { TodoList, CreateTodo } from '@/components'
 import { UpdateTodoPayload } from '@/types/todo'
+import Head from 'next/head'
 
 const Home: NextPage = () => {
   const utils = trpc.useContext()
@@ -48,11 +49,14 @@ const Home: NextPage = () => {
 
   return (
     <div className="my-0 mx-auto py-56 h-screen w-1/6">
+      <Head>
+        <title>T3 stack todo list</title>
+      </Head>
       <div className="mb-4">
         <CreateTodo onCreateTodo={createTodo} />
       </div>
       <TodoList
-        onTodoStatusChange={payload => updateTodo(payload)}
+        onTodoChange={payload => updateTodo(payload)}
         onRemoveTodo={removeTodo}
         todos={data || []}
       />
