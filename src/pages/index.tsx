@@ -27,10 +27,6 @@ const Home: NextPage = () => {
     }
   })
 
-  if (isLoading) return <p>Loading...</p>
-
-  if (error) return <div>Error: {error.message}</div>
-
   function createTodo(todoTitle: string) {
     createMutation({
       title: todoTitle
@@ -47,19 +43,27 @@ const Home: NextPage = () => {
     updateMutation(payload)
   }
 
+  if (error) return <div>Error: {error.message}</div>
+
   return (
     <div className="my-0 mx-auto py-56 h-screen w-1/6">
-      <Head>
-        <title>T3 stack todo list</title>
-      </Head>
-      <div className="mb-4">
-        <CreateTodo onCreateTodo={createTodo} />
-      </div>
-      <TodoList
-        onTodoChange={payload => updateTodo(payload)}
-        onRemoveTodo={removeTodo}
-        todos={data || []}
-      />
+      {isLoading ? (
+        <>Loading...</>
+      ) : (
+        <>
+          <Head>
+            <title>T3 stack todo list</title>
+          </Head>
+          <div className="mb-4">
+            <CreateTodo onCreateTodo={createTodo} />
+          </div>
+          <TodoList
+            onTodoChange={payload => updateTodo(payload)}
+            onRemoveTodo={removeTodo}
+            todos={data || []}
+          />
+        </>
+      )}
     </div>
   )
 }

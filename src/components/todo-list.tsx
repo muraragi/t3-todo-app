@@ -26,5 +26,5 @@ export const TodoList = ({
     />
   ))
 
-  return <div className="flex flex-col">{renderTodos}</div>
+  return <div className="flex flex-col gap-y-2">{renderTodos}</div>
 }

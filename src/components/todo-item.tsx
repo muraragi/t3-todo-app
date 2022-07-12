@@ -70,7 +70,7 @@ export const TodoItem = ({
 
   return (
     <div
-      className={`p-2 max-w-full break-all flex justify-between gap-x-2 transition-all items-center rounded cursor-pointer -ml-2 group ${
+      className={`relative p-2 max-w-full break-all flex justify-between gap-x-2 transition-all items-center rounded cursor-pointer group ${
         !editMode ? 'hover:bg-indigo-700/30' : ''
       }`}
       onClick={handleActivateEditMode}
@@ -85,18 +85,25 @@ export const TodoItem = ({
       >
         {item.title}
       </div>
-      <div className="flex gap-x-4">
-        <FaTrash
-          onClick={handleRemove}
-          className="opacity-0 cursor-pointer transition-all hover:text-red-700 active:text-red-800 active:scale-95 group-hover:opacity-100"
-        />
-        <FaCheck
-          onClick={handleStatusChange}
-          className={`cursor-pointer transition-all ${
-            item.isDone ? 'text-indigo-700' : ''
-          } hover:text-indigo-700 active:text-indigo-800 active:scale-95`}
-        />
-      </div>
+      {!editMode && (
+        <div className="flex gap-x-4">
+          <FaTrash
+            onClick={handleRemove}
+            className="opacity-0 cursor-pointer transition-all hover:text-red-700 active:text-red-800 active:scale-95 group-hover:opacity-100"
+          />
+          <FaCheck
+            onClick={handleStatusChange}
+            className={`cursor-pointer transition-all ${
+              item.isDone ? 'text-indigo-700' : ''
+            } hover:text-indigo-700 active:text-indigo-800 active:scale-95`}
+          />
+        </div>
+      )}
+      {editMode && (
+        <div className="text-xs font-bold flex-shrink-0">
+          CTRL + ENTER/blur to save
+        </div>
+      )}
     </div>
   )
 }

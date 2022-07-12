@@ -9,7 +9,8 @@ module.exports = {
       }
     },
     fontSize: {
-      base: ['18px', '28px']
+      base: ['18px', '28px'],
+      xs: ['10px', '12px']
     }
   },
   plugins: []
