@@ -14,7 +14,7 @@ export const Button = ({
   return (
     <button
       disabled={disabled}
-      className="py-2 px-4 bg-indigo-700 hover:bg-indigo-800 active:scale-95 cursor-pointer rounded transition-all whitespace-nowrap"
+      className="py-2 px-4 bg-indigo-700 cursor-pointer rounded transition-all whitespace-nowrap enabled:hover:bg-indigo-800 enabled:active:scale-95 disabled:cursor-not-allowed disabled:bg-indigo-400"
       onClick={onClick}
     >
       {children}

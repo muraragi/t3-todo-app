@@ -9,11 +9,14 @@ const Home: NextPage = () => {
 
   const { data, isLoading, error } = trpc.useQuery(['todo.getAll'])
 
-  const { mutate: createMutation } = trpc.useMutation(['todo.create'], {
-    onSuccess() {
-      utils.invalidateQueries(['todo.getAll'])
+  const { mutate: createMutation, isLoading: isCreating } = trpc.useMutation(
+    ['todo.create'],
+    {
+      onSuccess() {
+        utils.invalidateQueries(['todo.getAll'])
+      }
     }
-  })
+  )
 
   const { mutate: deleteMutation } = trpc.useMutation(['todo.delete'], {
     onSuccess() {
@@ -55,7 +58,7 @@ const Home: NextPage = () => {
             <title>T3 stack todo list</title>
           </Head>
           <div className="mb-4">
-            <CreateTodo onCreateTodo={createTodo} />
+            <CreateTodo loading={isCreating} onCreateTodo={createTodo} />
           </div>
           <TodoList
             onTodoChange={payload => updateTodo(payload)}

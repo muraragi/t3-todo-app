@@ -3,9 +3,13 @@ import { Button, Input } from '@/components'
 
 type CreateTodoProps = {
   onCreateTodo: (todoTitle: string) => void
+  loading: boolean
 }
 
-export const CreateTodo = ({ onCreateTodo }: CreateTodoProps): JSX.Element => {
+export const CreateTodo = ({
+  onCreateTodo,
+  loading
+}: CreateTodoProps): JSX.Element => {
   const [todoTitle, setTodoTitle] = useState('')
 
   function handleAddTodo() {
@@ -26,7 +30,7 @@ export const CreateTodo = ({ onCreateTodo }: CreateTodoProps): JSX.Element => {
         value={todoTitle}
         placeholder="Todo title"
       />
-      <Button disabled={!todoTitle.length} onClick={handleAddTodo}>
+      <Button disabled={!todoTitle.length || loading} onClick={handleAddTodo}>
         Add todo
       </Button>
     </div>
